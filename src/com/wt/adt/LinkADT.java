@@ -1,8 +1,6 @@
 package com.wt.adt;
 
 import java.util.HashMap;
-import java.util.Iterator;
-import java.util.LinkedList;
 
 /**
  * 链表ADT
@@ -280,7 +278,6 @@ public class LinkADT<T> {
      * @return
      */
     private static SingleNode<Integer> mergeV2(SingleNode<Integer> nodeA, SingleNode<Integer> nodeB) {
-        SingleNode<Integer> result;
 
         if (nodeA == null) {
             return nodeB;
@@ -290,15 +287,10 @@ public class LinkADT<T> {
 
         // 找出较小的节点
         if (compareNode(nodeA, nodeB) <= 0) {
-            result = nodeA;
-            nodeA = nodeA.next;
+            return nodeA.next = mergeV2(nodeA.next, nodeB);
         } else {
-            result = nodeB;
-            nodeB = nodeB.next;
+            return nodeB.next = mergeV2(nodeB.next, nodeB);
         }
-
-        result.next = mergeV2(nodeA, nodeB);
-        return result;
     }
 
     /**
